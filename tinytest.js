@@ -39,10 +39,10 @@
  */
 
 // DONE: Get successes to be green
-// TODO: Make sure only one error per failure goes to the console.
+// DONE: Make sure only one error per failure goes to the console.
 // DONE: Make Failures red.
-// TODO: Show stack traces for failures.
-// TODO: Only stack traces if you click expand.
+// DONE: Show stack traces for failures.
+// DONE: Only stack traces if you click expand.
 // TODO: Output summery statistics to the DOM.
 
 
@@ -57,8 +57,9 @@ var TinyTest = {
                 console.log('%c' + testName, 'color: green;');
             } catch (e) {
                 failures++;
-                console.log('%c' + testName, 'color: red;');
+                console.groupCollapsed('%c' + testName, 'color: red;');
                 console.error(e.stack);
+                console.groupEnd();
             }
         }
         setTimeout(function() { // Give document a chance to complete
