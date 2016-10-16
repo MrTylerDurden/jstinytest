@@ -39,7 +39,7 @@
  */
 
 // DONE: Get successes to be green
-// TODO: Make Failures red.
+// DONE: Make Failures red.
 // TODO: Show stack traces for failures.
 // TODO: Only stack traces if you click expand.
 // TODO: Output summery statistics to the DOM.
@@ -56,7 +56,7 @@ var TinyTest = {
                 console.log('%c' + testName, 'color: green;');
             } catch (e) {
                 failures++;
-                console.error('Test:', testName, 'FAILED', e);
+                console.log('%c' + testName, 'color: red;');
                 console.error(e.stack);
             }
         }
