@@ -39,6 +39,7 @@
  */
 
 // DONE: Get successes to be green
+// TODO: Make sure only one error per failure goes to the console.
 // DONE: Make Failures red.
 // TODO: Show stack traces for failures.
 // TODO: Only stack traces if you click expand.
