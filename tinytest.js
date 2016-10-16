@@ -43,8 +43,33 @@
 // DONE: Make Failures red.
 // DONE: Show stack traces for failures.
 // DONE: Only stack traces if you click expand.
-// TODO: Output summery statistics to the DOM.
+// DONE: Output summery statistics to the DOM.
 
+var TinyTestHelper = {
+    renderStats: function(tests, failures) {
+        var numbOfTests = Object.keys(tests).length;
+        var numbOfSuccesses = numbOfTests - failures;
+        var numbOfFailures = failures;
+
+        var testWord = this.pluralizeTypeOne(numbOfTests, 'test');
+        var failureWord = this.pluralizeTypeOne(numbOfSuccesses, 'failure');
+        var successWord =this.pluralizeTypeTwo(numbOfSuccesses, 'success');
+
+        var summaryString = 'Ran ' + numbOfTests + ' ' + testWord + ': ' +
+                            numbOfSuccesses + ' ' + successWord + ', ' +
+                            numbOfFailures + ' ' + failureWord;
+
+        var summaryElement = document.createElement('h1');
+        summaryElement.textContent = summaryString;
+        document.body.appendChild(summaryElement);
+    },
+    pluralizeTypeOne: function(count, word) {
+        return count === 1 ? word : word + 's';
+    },
+    pluralizeTypeTwo: function(count, word) {
+        return count === 1 ? word : word + 'es';
+    }
+};
 
 var TinyTest = {
 
@@ -66,6 +91,7 @@ var TinyTest = {
             if (window.document && document.body) {
                 document.body.style.backgroundColor = (failures == 0 ? '#99ff99' : '#ff9999');
             }
+            TinyTestHelper.renderStats(tests, failures);
         }, 0);
     },
 
@@ -90,7 +116,6 @@ var TinyTest = {
             throw new Error('assertStrictEquals() "' + expected + '" !== "' + actual + '"');
         }
     },
-
 };
 
 var fail               = TinyTest.fail.bind(TinyTest),
